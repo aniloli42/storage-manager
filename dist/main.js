@@ -1,0 +1,1 @@
+(()=>{"use strict";const e=document.querySelector("[data-current-year]"),t=(new Date).getFullYear();e.innerText=t.toString()})();

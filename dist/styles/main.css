@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+  --primary-color: brown;
+  --text-light-color: #e1e1e1;
+  --text-dark-color: #333;
+  --link-color: var(--text-dark-color);
+  --link-hover-color: var(--primary-color);
+  --main-background-color: #ccc;
+  --footer-background-color: rgb(163, 163, 163);
+  --storage-container-color: rgb(188, 186, 186);
+  --add-button-background-color: rgb(63, 55, 55);
+  --add-button-text-color: var(--text-light-color);
+  --add-button-hover-background-color: rgb(53, 47, 47);
+}
+
+a,
+button {
+  outline: none;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--main-background-color);
+}
+
+.main-header {
+  background-color: var(--primary-color);
+}
+
+.brand-title {
+  padding: 0.5em 1em;
+  color: var(--text-light-color);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+main {
+  min-height: 87.25vh;
+}
+
+footer {
+  text-align: center;
+  padding: 0.5em 1em;
+  background-color: var(--footer-background-color);
+}
+
+.copyright-text {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  color: var(--text-dark-color);
+}
+
+.copyright-refer-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--link-color);
+  transition: color 250ms ease-out;
+}
+
+.copyright-refer-link:hover,
+.copyright-refer-link:focus-visible {
+  color: var(--link-hover-color);
+}
+
+main {
+  padding: 1em;
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+}
+
+.storage-wrapper {
+  border: 0.25em solid var(--primary-color);
+  border-radius: 0.25em;
+}
+
+.storage-header {
+  background: var(--primary-color);
+  padding-block: 0.25em;
+  padding-right: 0.25em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.storage-title {
+  font-size: 1rem;
+  padding-inline: 0.5em;
+  color: var(--text-light-color);
+}
+
+.storage-container {
+  min-height: 7em;
+  background-color: var(--storage-container-color);
+}
+
+.storage-add-button {
+  padding-inline: 1em;
+  padding-block: 0.35em;
+  border-radius: 0.25em;
+  background-color: var(--add-button-background-color);
+  color: var(--add-button-text-color);
+}
+
+.storage-add-button:hover,
+.storage-add-button:focus-visible {
+  background-color: var(--add-button-hover-background-color);
+}
