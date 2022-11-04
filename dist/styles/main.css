@@ -4,7 +4,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 :root {
@@ -19,6 +20,8 @@
   --add-button-background-color: rgb(63, 55, 55);
   --add-button-text-color: var(--text-light-color);
   --add-button-hover-background-color: rgb(53, 47, 47);
+  --storage-item-background-color: var(--footer-background-color);
+  --storage-item-hover-background-color: #ddd;
 }
 
 a,
@@ -46,7 +49,7 @@ html {
 }
 
 main {
-  min-height: 87.25vh;
+  min-height: 87.6vh;
 }
 
 footer {
@@ -59,7 +62,6 @@ footer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.25em;
   color: var(--text-dark-color);
 }
 
@@ -76,7 +78,7 @@ footer {
 }
 
 main {
-  padding: 1em;
+  padding: 0.75em;
   display: flex;
   gap: 0.5em;
   flex-direction: column;
@@ -98,19 +100,30 @@ main {
 
 .storage-title {
   font-size: 1rem;
-  padding-inline: 0.5em;
+  padding-inline: 0.25em;
   color: var(--text-light-color);
 }
 
 .storage-container {
   min-height: 7em;
+  max-height: 15em;
+  padding: 0.25em;
+  overflow-y: auto;
   background-color: var(--storage-container-color);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, max-content));
+  grid-template-rows: max-content;
+
+  gap: 0.25em;
+  grid-auto-rows: auto;
+  /* align-items: start; */
 }
 
 .storage-add-button {
   padding-inline: 1em;
-  padding-block: 0.35em;
+  padding-block: 0.5em;
   border-radius: 0.25em;
+  font-size: 1rem;
   background-color: var(--add-button-background-color);
   color: var(--add-button-text-color);
 }
@@ -118,4 +131,16 @@ main {
 .storage-add-button:hover,
 .storage-add-button:focus-visible {
   background-color: var(--add-button-hover-background-color);
+}
+
+.storage-item-button {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--storage-item-background-color);
+  border-radius: 0.25em;
+  font-size: 1rem;
+}
+
+.storage-item-button:hover,
+.storage-item-button:focus-visible {
+  background-color: var(--storage-item-hover-background-color);
 }
