@@ -15,19 +15,53 @@
     <main>
       <section class="storage-wrapper">
         <header class="storage-header">
-          <h2 class="storage-title">Local Storage</h2>
-          <button class="storage-add-button" title="Add New Item">
-            &plus;
+          <h2 class="storage-title">Add Item</h2>
+        </header>
+        <form class="form-wrapper" data-add-form>
+          <div class="form-element">
+            <label class="radio-element">
+              <input type="radio" name="storage" value="local" checked />
+              Local Storage
+            </label>
+            <label class="radio-element">
+              <input type="radio" name="storage" value="session" />
+              Session Storage
+            </label>
+          </div>
+          <div class="form-element">
+            <input
+              type="text"
+              name="key"
+              placeholder="Key"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-element">
+            <input
+              type="text"
+              name="value"
+              placeholder="Value"
+              autocomplete="off"
+            />
+          </div>
+          <button
+            class="storage-add-button"
+            title="Add New Item"
+            data-add-button
+          >
+            Add/Update Item
           </button>
+        </form>
+      </section>
+      <section class="storage-wrapper">
+        <header class="storage-header">
+          <h2 class="storage-title">Local Storage</h2>
         </header>
         <div data-local class="storage-container"></div>
       </section>
       <section class="storage-wrapper">
         <header class="storage-header">
           <h2 class="storage-title">Session Storage</h2>
-          <button class="storage-add-button" title="Add New Item">
-            &plus;
-          </button>
         </header>
         <div data-session class="storage-container"></div>
       </section>

@@ -9,4 +9,6 @@ interface StorageComponents {
   storageInstance: StorageInstanceType
 }
 
-export { StorageComponents, StorageNameType, StorageItemType }
+type StorageType = 'local' | 'session'
+
+export { StorageComponents, StorageNameType, StorageItemType, StorageType }
