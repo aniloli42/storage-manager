@@ -72,6 +72,7 @@ function showStorageItemsIntoUI({
 		const storageArrowElement = document.createElement('span')
 		storageArrowElement.dataset.arrow = ''
 		storageArrowElement.innerHTML = '&darr;'
+		storageArrowElement.classList.add('storage-item-controls')
 
 		const storageContentElement = document.createElement('button')
 		storageContentElement.className = 'storage-item-content'
@@ -160,18 +161,22 @@ function getStorage(storageName: StorageType) {
 
 function showHideValue(event: MouseEvent) {
 	const targetedStorage = event.target as HTMLButtonElement
-	;(targetedStorage?.nextSibling as HTMLElement)?.classList.toggle('show')
 
-	changeUpDownArrow(targetedStorage.parentElement as HTMLElement)
-}
-
-function changeUpDownArrow(element: HTMLElement) {
-	const arrowElement = element.querySelector('[data-arrow]') as HTMLElement
-	const contentElement = element.querySelector(
+	const contentElement = targetedStorage?.parentElement?.querySelector(
 		'[data-content]'
 	) as HTMLElement
+	contentElement?.classList.toggle('show')
 
-	if (contentElement.classList.contains('show'))
+	changeUpDownArrow(
+		targetedStorage.parentElement as HTMLElement,
+		contentElement
+	)
+}
+
+function changeUpDownArrow(element: HTMLElement, contentElement: HTMLElement) {
+	const arrowElement = element.querySelector('[data-arrow]') as HTMLElement
+
+	if (contentElement?.classList.contains('show'))
 		return (arrowElement.innerHTML = '&uarr;')
 
 	arrowElement.innerHTML = '&darr;'

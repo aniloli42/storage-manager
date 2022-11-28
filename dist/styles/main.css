@@ -184,6 +184,15 @@ main {
 	display: flex;
 }
 
+.storage-item-header-title,
+.storage-item-controls {
+	pointer-events: none;
+}
+
+[data-arrow] {
+	user-select: none;
+}
+
 .storage-item-header-title {
 	font-size: 0.85em;
 }
@@ -197,6 +206,7 @@ main {
 	min-height: 1.75em;
 	min-width: 1.75em;
 	margin-inline: 1em;
+	pointer-events: all;
 }
 
 .storage-item-delete:hover,
