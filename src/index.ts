@@ -2,7 +2,7 @@ import { StorageComponents, StorageType } from './type'
 
 // Display Current Year In Copyright Section
 const currentYearElement = document.querySelector(
-  '[data-current-year]'
+	'[data-current-year]'
 ) as HTMLParagraphElement
 
 const currentYear = new Date().getFullYear()
@@ -10,89 +10,177 @@ currentYearElement.innerText = currentYear.toString()
 
 // Storage Code
 const localStorageObj: StorageComponents = {
-  storageName: 'localStorage',
-  storageInstance: localStorage,
+	storageName: 'localStorage',
+	storageInstance: localStorage,
 }
 const sessionStorageObj: StorageComponents = {
-  storageName: 'sessionStorage',
-  storageInstance: sessionStorage,
+	storageName: 'sessionStorage',
+	storageInstance: sessionStorage,
 }
 
 const localStorageContainer = document.querySelector(
-  '[data-local]'
+	'[data-local]'
 ) as HTMLElement
 const sessionStorageContainer = document.querySelector(
-  '[data-session]'
+	'[data-session]'
 ) as HTMLElement
 
-function resetUI(storage: 'local' | 'session') {
-  if (storage === 'local') return showStorageItemsIntoUI(localStorageObj)
-  if (storage === 'session') return showStorageItemsIntoUI(sessionStorageObj)
+function resetUI(storage: StorageType) {
+	if (storage === 'local' || storage === 'localStorage')
+		return showStorageItemsIntoUI(localStorageObj)
+	if (storage === 'session' || storage === 'sessionStorage')
+		return showStorageItemsIntoUI(sessionStorageObj)
 }
 
 function showStorageItemsIntoUI({
-  storageName,
-  storageInstance,
+	storageName,
+	storageInstance,
 }: StorageComponents) {
-  const storageItems = { ...storageInstance }
+	const storageItems = { ...storageInstance }
 
-  storageName === 'localStorage'
-    ? (localStorageContainer.innerHTML = '')
-    : (sessionStorageContainer.innerHTML = '')
+	storageName === 'localStorage'
+		? (localStorageContainer.innerHTML = '')
+		: (sessionStorageContainer.innerHTML = '')
 
-  for (let storageItem in storageItems) {
-    const storageItemElement = document.createElement('button')
-    storageItemElement.className = 'storage-item-button'
-    storageItemElement.innerText = storageItem
+	for (let storageItem in storageItems) {
+		const storageItemElement = document.createElement('div')
+		storageItemElement.className = 'storage-item'
 
-    if (storageName === 'localStorage')
-      localStorageContainer?.append(storageItemElement)
-    if (storageName === 'sessionStorage')
-      sessionStorageContainer?.append(storageItemElement)
-  }
+		const storageHeaderElement = document.createElement('div')
+		storageHeaderElement.className = 'storage-item-header'
+		storageHeaderElement.setAttribute('role', 'button')
+		storageHeaderElement.ariaPressed = 'false'
+		storageHeaderElement.tabIndex = 0
+		storageHeaderElement.title = 'Click to show/hide'
+
+		storageHeaderElement.addEventListener('click', showHideValue)
+
+		const storageHeaderTitle = document.createElement('h3')
+		storageHeaderTitle.className = 'storage-item-header-title'
+		storageHeaderTitle.innerText = storageItem
+
+		const storageItemControls = document.createElement('div')
+		storageItemControls.classList.add('storage-item-controls')
+
+		const storageItemDeleteElement = document.createElement('button')
+		storageItemDeleteElement.className = 'storage-item-delete'
+		storageItemDeleteElement.innerHTML = '&Cross;'
+		storageItemDeleteElement.dataset.storage = storageName
+		storageItemDeleteElement.dataset.key = storageItem
+		storageItemDeleteElement.addEventListener('click', deleteStorageItem)
+
+		const storageArrowElement = document.createElement('span')
+		storageArrowElement.dataset.arrow = ''
+		storageArrowElement.innerHTML = '&darr;'
+
+		const storageContentElement = document.createElement('button')
+		storageContentElement.className = 'storage-item-content'
+		storageContentElement.title = 'Click to copy'
+		storageContentElement.dataset.content = ''
+		storageContentElement.innerText = storageItems[storageItem]
+		storageContentElement.addEventListener('click', copyToClipboard)
+
+		storageItemControls.append(storageItemDeleteElement)
+		storageItemControls.append(storageArrowElement)
+
+		storageHeaderElement.append(storageHeaderTitle)
+		storageHeaderElement.append(storageItemControls)
+		storageItemElement.append(storageHeaderElement)
+		storageItemElement.append(storageContentElement)
+
+		if (storageName === 'localStorage')
+			localStorageContainer?.append(storageItemElement)
+		if (storageName === 'sessionStorage')
+			sessionStorageContainer?.append(storageItemElement)
+	}
 }
 
 showStorageItemsIntoUI(localStorageObj)
 showStorageItemsIntoUI(sessionStorageObj)
 
 const addFormElement = document.querySelector(
-  '[data-add-form]'
+	'[data-add-form]'
 ) as HTMLFormElement
 
 addFormElement.addEventListener('submit', addItemIntoStorage)
 
 function addItemIntoStorage(event: SubmitEvent) {
-  event.preventDefault()
-  const formElement = event.target as HTMLFormElement
-  const inputValue = new FormData(formElement)
-  const keyInputElement = formElement.querySelector(
-    'input[name="key"]'
-  ) as HTMLInputElement
-  const valueInputElement = formElement.querySelector(
-    'input[name="value"]'
-  ) as HTMLInputElement
+	event.preventDefault()
+	const formElement = event.target as HTMLFormElement
+	const inputValue = new FormData(formElement)
+	const keyInputElement = formElement.querySelector(
+		'input[name="key"]'
+	) as HTMLInputElement
+	const valueInputElement = formElement.querySelector(
+		'input[name="value"]'
+	) as HTMLInputElement
 
-  const targetedStorage = inputValue.get('storage')
-  const key = inputValue.get('key')?.toString()
-  const value = inputValue.get('value')?.toString()
+	const targetedStorage = inputValue.get('storage')
+	const key = inputValue.get('key')?.toString()
+	const value = inputValue.get('value')?.toString()
 
-  if (targetedStorage == undefined || targetedStorage === '') return
-  if (key === '' || key == null) return
-  if (value === '' || value == null) return
+	if (targetedStorage == undefined || targetedStorage === '') return
+	if (key === '' || key == null) return
+	if (value === '' || value == null) return
 
-  const storage = getStorage(targetedStorage as StorageType)
+	const storage = getStorage(targetedStorage as StorageType)
 
-  if (storage == null) return
-  storage.setItem(key, value)
+	if (storage == null) return
+	storage.setItem(key, value)
 
-  resetUI(targetedStorage as StorageType)
-  keyInputElement.value = ''
-  valueInputElement.value = ''
+	resetUI(targetedStorage as StorageType)
+	keyInputElement.value = ''
+	valueInputElement.value = ''
 }
 
-function deleteItemFromStorage() {}
+function deleteStorageItem(event: MouseEvent) {
+	const targetedItem = event.target
+	if (targetedItem == null) return
+	if (!(targetedItem instanceof HTMLButtonElement)) return
+
+	const storageName = targetedItem.dataset.storage
+	const key = targetedItem.dataset.key
+
+	if (storageName == undefined) return
+	if (key == undefined) return
+
+	const storage = getStorage(storageName as StorageType)
+
+	if (storage == null) return
+	storage.removeItem(key)
+	resetUI(storageName as StorageType)
+}
 
 function getStorage(storageName: StorageType) {
-  if (storageName === 'local') return localStorage
-  if (storageName === 'session') return sessionStorage
+	if (storageName === 'local' || storageName === 'localStorage')
+		return localStorage
+	if (storageName === 'session' || storageName === 'sessionStorage')
+		return sessionStorage
+}
+
+function showHideValue(event: MouseEvent) {
+	const targetedStorage = event.target as HTMLButtonElement
+	;(targetedStorage?.nextSibling as HTMLElement)?.classList.toggle('show')
+
+	changeUpDownArrow(targetedStorage.parentElement as HTMLElement)
+}
+
+function changeUpDownArrow(element: HTMLElement) {
+	const arrowElement = element.querySelector('[data-arrow]') as HTMLElement
+	const contentElement = element.querySelector(
+		'[data-content]'
+	) as HTMLElement
+
+	if (contentElement.classList.contains('show'))
+		return (arrowElement.innerHTML = '&uarr;')
+
+	arrowElement.innerHTML = '&darr;'
+}
+
+function copyToClipboard(event: MouseEvent) {
+	const targetedContent = event.target as HTMLButtonElement
+	if (targetedContent == null || targetedContent.innerText == '') return
+
+	// copy text into clipboard
+	navigator.clipboard.writeText(targetedContent.innerText)
 }

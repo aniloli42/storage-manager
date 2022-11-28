@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Storage Manager</title>
-    <script src="./main.js" defer></script>
-    <link rel="stylesheet" href="./styles/main.css" />
-  </head>
-  <body>
-    <header class="main-header">
-      <h1 class="brand-title">Storage Manager</h1>
-    </header>
-    <main>
-      <section class="storage-wrapper">
-        <header class="storage-header">
-          <h2 class="storage-title">Add Item</h2>
-        </header>
-        <form class="form-wrapper" data-add-form>
-          <div class="form-element">
-            <label class="radio-element">
-              <input type="radio" name="storage" value="local" checked />
-              Local Storage
-            </label>
-            <label class="radio-element">
-              <input type="radio" name="storage" value="session" />
-              Session Storage
-            </label>
-          </div>
-          <div class="form-element">
-            <input
-              type="text"
-              name="key"
-              placeholder="Key"
-              autocomplete="off"
-            />
-          </div>
-          <div class="form-element">
-            <input
-              type="text"
-              name="value"
-              placeholder="Value"
-              autocomplete="off"
-            />
-          </div>
-          <button
-            class="storage-add-button"
-            title="Add New Item"
-            data-add-button
-          >
-            Add/Update Item
-          </button>
-        </form>
-      </section>
-      <section class="storage-wrapper">
-        <header class="storage-header">
-          <h2 class="storage-title">Local Storage</h2>
-        </header>
-        <div data-local class="storage-container"></div>
-      </section>
-      <section class="storage-wrapper">
-        <header class="storage-header">
-          <h2 class="storage-title">Session Storage</h2>
-        </header>
-        <div data-session class="storage-container"></div>
-      </section>
-    </main>
-    <footer>
-      <p class="copyright-text">
-        Copyright &copy;&nbsp;<span data-current-year></span>&nbsp;
-        <a
-          href="https://aniloli42.me"
-          target="_blank"
-          rel="nofollow noreferrer"
-          class="copyright-refer-link"
-          >Anil Oli</a
-        >, All rights reserved.
-      </p>
-    </footer>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Storage Manager</title>
+		<script src="./main.js" defer></script>
+		<link rel="stylesheet" href="./styles/main.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<h1 class="brand-title">Storage Manager</h1>
+		</header>
+		<main>
+			<section class="storage-wrapper">
+				<header class="storage-header">
+					<h2 class="storage-title">Add Item</h2>
+				</header>
+				<form class="form-wrapper" data-add-form>
+					<div class="form-element">
+						<label class="radio-element">
+							<input
+								type="radio"
+								name="storage"
+								value="local"
+								checked
+							/>
+							Local Storage
+						</label>
+						<label class="radio-element">
+							<input
+								type="radio"
+								name="storage"
+								value="session"
+							/>
+							Session Storage
+						</label>
+					</div>
+					<div class="form-element">
+						<input
+							type="text"
+							name="key"
+							placeholder="Key"
+							autocomplete="off"
+						/>
+					</div>
+					<div class="form-element">
+						<input
+							type="text"
+							name="value"
+							placeholder="Value"
+							autocomplete="off"
+						/>
+					</div>
+					<button
+						class="storage-add-button"
+						title="You can add using different key or update using same key"
+						data-add-button
+					>
+						Add/Update Item
+					</button>
+				</form>
+			</section>
+			<section class="storage-wrapper">
+				<header class="storage-header">
+					<h2 class="storage-title">Local Storage</h2>
+				</header>
+				<div data-local class="storage-container"></div>
+			</section>
+			<section class="storage-wrapper">
+				<header class="storage-header">
+					<h2 class="storage-title">Session Storage</h2>
+				</header>
+				<div data-session class="storage-container"></div>
+			</section>
+		</main>
+		<footer>
+			<p class="copyright-text">
+				Copyright &copy;&nbsp;<span data-current-year></span>&nbsp;
+				<a
+					href="https://aniloli42.me"
+					target="_blank"
+					rel="nofollow noreferrer"
+					class="copyright-refer-link"
+					>Anil Oli</a
+				>, All rights reserved.
+			</p>
+		</footer>
+	</body>
 </html>
