@@ -54,6 +54,7 @@ function showStorageItemsIntoUI({
 		storageHeaderElement.title = 'Click to show/hide'
 
 		storageHeaderElement.addEventListener('click', showHideValue)
+		storageHeaderElement.addEventListener('keypress', showHideValue)
 
 		const storageHeaderTitle = document.createElement('h3')
 		storageHeaderTitle.className = 'storage-item-header-title'
@@ -65,6 +66,7 @@ function showStorageItemsIntoUI({
 		const storageItemDeleteElement = document.createElement('button')
 		storageItemDeleteElement.className = 'storage-item-delete'
 		storageItemDeleteElement.innerHTML = '&Cross;'
+		storageItemDeleteElement.title = 'Click to Remove'
 		storageItemDeleteElement.dataset.storage = storageName
 		storageItemDeleteElement.dataset.key = storageItem
 		storageItemDeleteElement.addEventListener('click', deleteStorageItem)
@@ -135,6 +137,7 @@ function addItemIntoStorage(event: SubmitEvent) {
 }
 
 function deleteStorageItem(event: MouseEvent) {
+	event.stopPropagation()
 	const targetedItem = event.target
 	if (targetedItem == null) return
 	if (!(targetedItem instanceof HTMLButtonElement)) return
@@ -159,7 +162,7 @@ function getStorage(storageName: StorageType) {
 		return sessionStorage
 }
 
-function showHideValue(event: MouseEvent) {
+function showHideValue(event: MouseEvent | KeyboardEvent) {
 	const targetedStorage = event.target as HTMLButtonElement
 
 	const contentElement = targetedStorage?.parentElement?.querySelector(

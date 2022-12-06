@@ -55,6 +55,16 @@ html {
 	background-color: var(--main-background-color);
 }
 
+html,
+body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
 .main-header {
 	background-color: var(--primary-color);
 }
@@ -66,14 +76,11 @@ html {
 	text-align: center;
 }
 
-main {
-	min-height: 87.6vh;
-}
-
 footer {
 	text-align: center;
 	padding: 0.5em 1em;
 	background-color: var(--footer-background-color);
+	justify-self: flex-end;
 }
 
 .copyright-text {
@@ -100,6 +107,7 @@ main {
 	display: flex;
 	gap: 0.5em;
 	flex-direction: column;
+	flex: 1;
 }
 
 .storage-wrapper {
